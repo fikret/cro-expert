@@ -21,7 +21,7 @@ Check what the machine has before you start, then take the best option available
 
 Detect Chrome tools with ToolSearch (`mcp__claude-in-chrome__`). Detect Python with `python3 --version` (also try `python --version` and `py --version` on Windows). Report which route you used in the final message.
 
-A report without any screenshots is still useful: `data.js` or `--no-images` gives the animated tour with verdict, finding cards, severity filter, and the page-level lane.
+A report without any screenshots is still useful: `data.js` or `--no-images` gives the animated tour with summary, finding cards, severity filter, and the page-level lane.
 
 ## Capture A: Claude in Chrome (positions measured)
 
@@ -80,16 +80,15 @@ Without measurement, look at the image, find the element for each finding, and e
 {
   "url": "https://example.com/", "title": "example.com audit", "captured_at": "2026-10-12",
   "language": "tr",
-  "verdict": {"primary_constraint": "...", "confidence": "▰▰▱ medium, because ...",
-              "measurement": "⚠️ Trusted with caveats", "assessed": "...", "not_assessed": "..."},
+  "verdict": {"primary_constraint": "...", "assessed": "...", "not_assessed": "..."},
   "do_first": [{"action": "Fix the conversion event", "finding": 1}],
   "works": ["Short form", "Real proof", "Clear FAQ"],
   "could_not_assess": ["Speed (API quota)", "Mobile layout"],
   "disclaimer": "AI-assisted audit; severity is indicative; not a substitute for expert review.",
   "findings": [{
     "id": 1, "title": "Conversion fires before success",
-    "evidence_tag": "observed", "severity": 4, "decision": "ship", "confidence": "▰▰▱",
-    "evidence": "...", "impact": "...", "fix": "...", "verify": "...",
+    "evidence_tag": "observed", "severity": 4, "decision": "ship",
+    "evidence": "...", "impact": "...", "fix": "...",
     "anchor": {"selector": "form#inquire", "text": "Gönder", "approx": false,
                "rects": {"desktop": [{"x": 700, "y": 1200, "w": 420, "h": 380}]},
                "fallback": "page"}

@@ -118,17 +118,17 @@ If value per conversion and volume are known, give a rough revenue-at-stake fram
 
 ## Step 7: Output
 
-Use the templates and the icon legend in [output-templates](references/output-templates.md). Write in the user's language and keep the icons. Use plain words and explain unavoidable technical terms in brackets ([plain-language](references/plain-language.md)). Standard report order:
+Use the templates in [output-templates](references/output-templates.md). Write in the user's language. Icons only in section headings, never in tables, cards, or sentences. Use plain words and explain unavoidable technical terms in brackets ([plain-language](references/plain-language.md)). Standard report order:
 
-1. 🎯 **Summary** (5 short lines): primary constraint, confidence, measurement trust, what you assessed and could not assess.
+1. 🎯 **Summary** (short lines): main blocker, what you checked, what you could not check.
 2. ⚡ **Do first**: the top 3 actions, one line each.
-3. 📋 **Overview table** with short cells: # | Finding | Evidence icon | Severity icon | Decision icon.
-4. 🔍 **Finding cards**, one per finding (evidence, impact, fix, how to verify), in table order.
+3. 📋 **Overview table** with short cells: # | Finding | Evidence | Severity | Decision (text labels, no icons).
+4. 🔍 **Finding cards**, one per finding (what I saw, impact, fix), in table order.
 5. ✅ **What works**, then 🧭 viability and 💰 revenue at stake when you have the numbers.
 6. ✍️ **Copy drafts**: 2-3 options with a one-line rationale each for the headline, main CTA, and form button, only when you have the offer context; mark as drafts and never invent proof. For pages with a form, add the **form audit** and **recommended form design**.
 7. 📊 **Measurement plan**, then 🚫 **Could not assess / data needed**.
 
-Keep it scannable: icons support the text labels and never replace them, long text goes into cards (not table cells), and the reader should know what to do first without scrolling. Lead with the single most important change.
+Keep it scannable: long text goes into cards (not table cells), and the reader should know what to do first without scrolling. Lead with the single most important change.
 
 ## Step 8: Animated visual report (automatic for public URLs)
 

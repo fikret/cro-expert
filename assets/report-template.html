@@ -131,17 +131,14 @@ button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);ou
 const DATA = window.CRO_DATA || /*__DATA__*/null;
 if(!DATA){document.body.textContent="No report data found. Put data.js (window.CRO_DATA = {...}) next to this file, or build the report with scripts/build_report.py.";throw new Error("no data");}
 (function(){
-const SEV_ICON={4:"🔴",3:"🟠",2:"🟡",1:"🟢",0:"⚪"};
-const EV_ICON={observed:"👁️",inferred:"🧠",needs_data:"❓"};
-const DEC_ICON={ship:"🚀",test:"🧪",research:"🔎"};
 const TR={ev:{observed:"Sayfada görüldü",inferred:"Yorumum",needs_data:"Verinize ihtiyaç var"},
   sev:{4:"Kritik",3:"Büyük",2:"Küçük",1:"Kozmetik",0:"Derecelendirilmedi"},
   dec:{ship:"Hemen yap",test:"Önce dene",research:"Önce araştır"},
   ui:{tour:"▶ Turu başlat",pause:"⏸ Duraklat",resume:"▶ Sürdür",next:"İleri →",prev:"← Geri",all:"Tümü",findings:"Bulgular",
    works:"✅ İyi çalışanlar",cant:"🚫 Kontrol edemediklerim",pagelvl:"📄 Tüm sayfayı ilgilendirenler",verdict:"🎯 Özet karar",first:"⚡ Önce şunları yap",
-   constraint:"Ana engel",confidence:"Güven",measurement:"Sayılarınıza güvenilir mi?",assessed:"Kontrol edilenler",notassessed:"Kontrol edilemeyenler",
-   evidence:"👁️ Ne gördüm",impact:"💥 Etki",fix:"🛠️ Çözüm",verify:"🔎 Nasıl kontrol edilir",desktop:"🖥️ Masaüstü",mobile:"📱 Mobil",
-   dark:"🌙 Koyu",light:"☀️ Açık",browse:"Raporu gez",restart:"↺ Turu yeniden başlat",close:"Kapat",endT:"Tur tamamlandı",
+   constraint:"Ana engel",assessed:"Kontrol edilenler",notassessed:"Kontrol edilemeyenler",
+   evidence:"Ne gördüm",impact:"Etki",fix:"Çözüm",desktop:"Masaüstü",mobile:"Mobil",
+   dark:"Koyu",light:"Açık",browse:"Raporu gez",restart:"↺ Turu yeniden başlat",close:"Kapat",endT:"Tur tamamlandı",
    approx:"İşaretin konumu yaklaşıktır (ekran görüntüsünden tahmin edildi).",step:"Bulgu",noimg:"Bu raporda ekran görüntüsü yok; bulgular yalnızca panelde gösterilir.",pageOnly:"Bu bulgu sayfada tek bir öğeye bağlı değil.",
    keys:"← → gezin · Boşluk oynat/duraklat · Esc kapat · 1-4 önem filtresi · D cihaz",shotsOf:"ekran görüntüleri",third:"Üçüncü taraf içerik, iç inceleme amacıyla saklanır."}};
 const EN={ev:{observed:"Seen on the page",inferred:"My judgment",needs_data:"Need your numbers"},
@@ -149,9 +146,9 @@ const EN={ev:{observed:"Seen on the page",inferred:"My judgment",needs_data:"Nee
   dec:{ship:"Do now",test:"Try first",research:"Find out first"},
   ui:{tour:"▶ Start tour",pause:"⏸ Pause",resume:"▶ Resume",next:"Next →",prev:"← Back",all:"All",findings:"Findings",
    works:"✅ What works",cant:"🚫 What I could not check",pagelvl:"📄 About the whole page",verdict:"🎯 Summary",first:"⚡ Do these first",
-   constraint:"Main blocker",confidence:"Confidence",measurement:"Can you trust your numbers?",assessed:"What I checked",notassessed:"What I could not check",
-   evidence:"👁️ What I saw",impact:"💥 Impact",fix:"🛠️ Fix",verify:"🔎 How to check it worked",desktop:"🖥️ Desktop",mobile:"📱 Mobile",
-   dark:"🌙 Dark",light:"☀️ Light",browse:"Browse the report",restart:"↺ Restart tour",close:"Close",endT:"Tour complete",
+   constraint:"Main blocker",assessed:"What I checked",notassessed:"What I could not check",
+   evidence:"What I saw",impact:"Impact",fix:"Fix",desktop:"Desktop",mobile:"Mobile",
+   dark:"Dark",light:"Light",browse:"Browse the report",restart:"↺ Restart tour",close:"Close",endT:"Tour complete",
    approx:"The marker position is approximate (estimated from the screenshot).",step:"Finding",noimg:"This report has no screenshots; findings are shown in the panel only.",pageOnly:"This finding is not tied to a single element on the page.",
    keys:"← → navigate · Space play/pause · Esc close · 1-4 severity filter · D device",shotsOf:"screenshots",third:"Third-party content, kept for internal review."}};
 const lang=(DATA.language||"tr").toLowerCase().startsWith("tr")?"tr":"en";
@@ -221,13 +218,13 @@ function renderSide(){
   const all=el("button","chip",U.all);all.type="button";all.setAttribute("aria-pressed",String(!filter.size));
   all.onclick=()=>{filter.clear();refresh();};chips.appendChild(all);
   [4,3,2,1,0].filter(v=>F.some(f=>f.severity===v)).forEach(v=>{
-    const c=el("button","chip",SEV_ICON[v]+" "+L.sev[v]);c.type="button";c.setAttribute("aria-pressed",String(filter.has(v)));
+    const c=el("button","chip",L.sev[v]);c.type="button";c.setAttribute("aria-pressed",String(filter.has(v)));
     c.onclick=()=>{filter.has(v)?filter.delete(v):filter.add(v);refresh();};chips.appendChild(c);});
   s.appendChild(chips);
   const list=el("div","list");
   order().forEach(f=>{const b=el("button","item");b.type="button";b.dataset.id=f.id;b.style.setProperty("--sev",sevVar(f.severity));
     b.appendChild(el("span","n",String(f.id)));
-    const t=el("span","t",f.title);const m=el("span","m",EV_ICON[f.evidence_tag]+" "+L.ev[f.evidence_tag]+" · "+DEC_ICON[f.decision]+" "+L.dec[f.decision]+(rectOf(f)?"":" · "+U.pagelvl));
+    const t=el("span","t",f.title);const m=el("span","m",L.ev[f.evidence_tag]+" · "+L.dec[f.decision]+(rectOf(f)?"":" · "+U.pagelvl));
     t.appendChild(m);b.appendChild(t);
     b.onclick=()=>{stop();go(order().findIndex(o=>o.id===f.id));};list.appendChild(b);});
   s.appendChild(list);
@@ -268,14 +265,13 @@ function fillCard(f,i,n){
   card.textContent="";
   const h=el("h2",null,f.id+" · "+f.title);h.id="cardT";card.appendChild(h);
   const tags=el("div","tags");
-  const sv=el("span","tag sev",SEV_ICON[f.severity]+" "+f.severity+" "+L.sev[f.severity]);
-  tags.appendChild(sv);tags.appendChild(el("span","tag",EV_ICON[f.evidence_tag]+" "+L.ev[f.evidence_tag]));
-  tags.appendChild(el("span","tag",DEC_ICON[f.decision]+" "+L.dec[f.decision]));
-  if(f.confidence)tags.appendChild(el("span","tag",f.confidence));
+  const sv=el("span","tag sev",L.sev[f.severity]);
+  tags.appendChild(sv);tags.appendChild(el("span","tag",L.ev[f.evidence_tag]));
+  tags.appendChild(el("span","tag",L.dec[f.decision]));
   card.appendChild(tags);
   if(!rectOf(f))card.appendChild(el("div","field",U.pageOnly));
-  else if(isApprox(f))card.appendChild(el("div","field","📍 "+U.approx));
-  [["evidence",U.evidence],["impact",U.impact],["fix",U.fix],["verify",U.verify]].forEach(p=>{if(f[p[0]]){const d=el("div","field");d.appendChild(el("b",null,p[1]));d.appendChild(el("span",null,f[p[0]]));card.appendChild(d);}});
+  else if(isApprox(f))card.appendChild(el("div","field",U.approx));
+  [["evidence",U.evidence],["impact",U.impact],["fix",U.fix]].forEach(p=>{if(f[p[0]]){const d=el("div","field");d.appendChild(el("b",null,p[1]));d.appendChild(el("span",null,f[p[0]]));card.appendChild(d);}});
   const bar=el("div","bar");const bi=el("i");bar.appendChild(bi);card.appendChild(bar);card._bar=bi;
   const nav=el("div","nav");
   const pv=el("button","btn",U.prev);pv.type="button";pv.onclick=()=>{stop();go(idx-1);};
@@ -290,7 +286,7 @@ function go(i){
   if(i>=o.length){showEnd();return;} if(i<0)i=0;
   idx=i;const f=o[i];$("intro").classList.remove("on");$("end").classList.remove("on");
   fillCard(f,i,o.length);card.classList.add("on");
-  elapsed=0;const txt=[f.evidence,f.impact,f.fix,f.verify].join(" ").length;dwell=Math.min(14000,5000+txt*22);
+  elapsed=0;const txt=[f.evidence,f.impact,f.fix].join(" ").length;dwell=Math.min(14000,5000+txt*22);
   requestAnimationFrame(()=>{place(f,true);card.focus({preventScroll:true});});
   markActive();
 }
@@ -308,10 +304,10 @@ function kvRow(dl,k_,v){if(!v)return;dl.appendChild(el("dt",null,k_));dl.appendC
 function showIntro(){
   const v=DATA.verdict||{};const o=$("intro");o.textContent="";const p=el("div","panel rise");
   p.appendChild(el("h2",null,U.verdict));p.appendChild(el("p","lead",DATA.title||DATA.url||""));
-  const dl=el("dl","kv");kvRow(dl,U.constraint,v.primary_constraint);kvRow(dl,U.confidence,v.confidence);kvRow(dl,U.measurement,v.measurement);
+  const dl=el("dl","kv");kvRow(dl,U.constraint,v.primary_constraint);
   kvRow(dl,U.assessed,v.assessed);kvRow(dl,U.notassessed,v.not_assessed);p.appendChild(dl);
   if(DATA.do_first&&DATA.do_first.length){const w=el("div");w.appendChild(el("strong",null,U.first));const ol=el("ol");
-    DATA.do_first.forEach(d=>{const f=F.find(x=>x.id===d.finding);const li=el("li",null,(f?DEC_ICON[f.decision]+" ":"")+d.action+(f?" ("+U.step+" "+f.id+")":""));ol.appendChild(li);});w.appendChild(ol);p.appendChild(w);}
+    DATA.do_first.forEach(d=>{const f=F.find(x=>x.id===d.finding);const li=el("li",null,(f?L.dec[f.decision]+": ":"")+d.action+(f?" ("+U.step+" "+f.id+")":""));ol.appendChild(li);});w.appendChild(ol);p.appendChild(w);}
   const a=el("div","actions");const go1=el("button","btn primary",U.tour);go1.type="button";go1.onclick=()=>{o.classList.remove("on");go(0);start();};
   const go2=el("button","btn",U.browse);go2.type="button";go2.onclick=()=>o.classList.remove("on");a.appendChild(go1);a.appendChild(go2);p.appendChild(a);
   o.appendChild(p);o.classList.add("on");setTimeout(()=>go1.focus(),50);
@@ -321,7 +317,7 @@ function showEnd(){
   const o=$("end");o.textContent="";const p=el("div","panel rise");p.appendChild(el("h2",null,"🏁 "+U.endT));
   const cs=el("div","counts");[4,3,2,1,0].filter(v=>F.some(f=>f.severity===v)).forEach(v=>{
     const c=el("div","count");c.style.borderColor=sevVar(v);const n=F.filter(f=>f.severity===v).length;const s=el("strong","0");s.style.color=sevVar(v);
-    c.appendChild(s);c.appendChild(el("span",null,SEV_ICON[v]+" "+L.sev[v]));cs.appendChild(c);
+    c.appendChild(s);c.appendChild(el("span",null,L.sev[v]));cs.appendChild(c);
     if(reduce)s.textContent=String(n);else{let t0=null;const step=ts=>{if(t0==null)t0=ts;const q=Math.min(1,(ts-t0)/700);s.textContent=String(Math.round(n*q));if(q<1)requestAnimationFrame(step);};requestAnimationFrame(step);}});
   p.appendChild(cs);
   if(DATA.works&&DATA.works.length){p.appendChild(el("strong",null,U.works));const ul=el("ul");DATA.works.forEach(w=>ul.appendChild(el("li",null,w)));p.appendChild(ul);}

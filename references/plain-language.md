@@ -88,24 +88,23 @@ Keep these only when the reader already uses them (for example the user wrote "C
 
 ## Labels for decisions and sections
 
-Use these names in the chat report and the animated report. The icons stay the same.
+Use these names in the chat report and the animated report. Icons appear only in section headings; labels in tables and cards are plain text.
 
-| Icon | English label | Türkçe etiket | Meaning |
+| Heading icon | English label | Türkçe etiket | Meaning |
 |---|---|---|---|
-| 🚀 | Do now | Hemen yap | Safe to change right away |
-| 🧪 | Try first | Önce dene | Change it for some visitors first and compare |
-| 🔎 | Find out first | Önce araştır | Need more information before changing |
-| 👁️ | Seen on the page | Sayfada görüldü | A fact visible on the page |
-| 🧠 | My judgment | Yorumum | An informed guess about visitor behaviour |
-| ❓ | Need your numbers | Verinize ihtiyaç var | Cannot know without your data |
+| | Do now | Hemen yap | Safe to change right away |
+| | Try first | Önce dene | Change it for some visitors first and compare |
+| | Find out first | Önce araştır | Need more information before changing |
+| | Seen on the page | Sayfada görüldü | A fact visible on the page |
+| | My judgment | Yorumum | An informed guess about visitor behaviour |
+| | Need your numbers | Verinize ihtiyaç var | Cannot know without your data |
 | 🎯 | Summary | Özet karar | |
 | ⚡ | Do these first | Önce şunları yap | |
 | 🧭 | Can you test? | Test yapılabilir mi? | Traffic check |
 | 💰 | What it could be worth | Değeri ne olabilir | Simple arithmetic, not a forecast |
 | 📊 | How to track results | Sonuçları nasıl izlersiniz | |
 | 🚫 | What I could not check | Kontrol edemediklerim | |
-| "Primary constraint" | Main blocker | Ana engel | The biggest thing holding results back |
-| "Measurement trust" | Can you trust your numbers? | Sayılarınıza güvenilir mi? | |
+| | Main blocker | Ana engel | The biggest thing holding results back |
 
 Severity words stay: Critical / Major / Minor / Cosmetic (Kritik / Büyük / Küçük / Kozmetik).
 
