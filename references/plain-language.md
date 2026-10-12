@@ -105,6 +105,10 @@ Use these names in the chat report and the animated report. Icons appear only in
 | 📊 | How to track results | Sonuçları nasıl izlersiniz | |
 | 🚫 | What I could not check | Kontrol edemediklerim | |
 | | Main blocker | Ana engel | The biggest thing holding results back |
+| | Change (Now → New) | Değişiklik (Şu an → Yeni) | Ready-to-paste wording for a text fix |
+| | Smaller notes | Daha küçük notlar | Minor items, one line each |
+| | Next step | Sonraki adım | Do the top 3, then run the audit again |
+| | Previous audit | Önceki denetim | How many earlier findings are fixed, open, new |
 
 Severity words stay: Critical / Major / Minor / Cosmetic (Kritik / Büyük / Küçük / Kozmetik).
 

@@ -112,6 +112,19 @@ def validate(data):
                 fail("finding %d: anchor must be an object" % fid)
             if a.get("fallback", "page") not in FALLBACK:
                 fail("finding %d: anchor.fallback must be one of %s" % (fid, sorted(FALLBACK)))
+    if len(fs) > 7:
+        warn("%d findings; more than 7 is too long. Merge findings with the same cause and move small ones to notes[]" % len(fs))
+    for f in fs:
+        ch = f.get("change")
+        if ch is not None and (not isinstance(ch, dict) or not (ch.get("from") or ch.get("to"))):
+            fail("finding %d: change must be an object with from and/or to" % f["id"])
+    notes = data.get("notes") or []
+    if not isinstance(notes, list) or not all(isinstance(n, str) for n in notes):
+        fail("notes must be a list of strings")
+    if data.get("next_step") is not None and not isinstance(data["next_step"], str):
+        fail("next_step must be a string")
+    if data.get("comparison") is not None and not isinstance(data["comparison"], dict):
+        fail("comparison must be an object")
     do_first = data.get("do_first") or []
     if len(do_first) > 3:
         fail("do_first may have at most 3 entries")

@@ -83,12 +83,16 @@ Without measurement, look at the image, find the element for each finding, and e
   "verdict": {"primary_constraint": "...", "assessed": "...", "not_assessed": "..."},
   "do_first": [{"action": "Fix the conversion event", "finding": 1}],
   "works": ["Short form", "Real proof", "Clear FAQ"],
+  "notes": ["One-line smaller note"],
+  "next_step": "Do the top 3, then run this audit again.",
+  "comparison": {"date": "2026-09-01", "previous_total": 12, "resolved": 7, "still_open": 3, "new": 2},
   "could_not_assess": ["Speed (API quota)", "Mobile layout"],
   "disclaimer": "AI-assisted audit; severity is indicative; not a substitute for expert review.",
   "findings": [{
     "id": 1, "title": "Conversion fires before success",
     "evidence_tag": "observed", "severity": 4, "decision": "ship",
     "evidence": "...", "impact": "...", "fix": "...",
+    "change": {"from": "Kayıt Ol", "to": "Yerimi ayırt"},
     "anchor": {"selector": "form#inquire", "text": "Gönder", "approx": false,
                "rects": {"desktop": [{"x": 700, "y": 1200, "w": 420, "h": 380}]},
                "fallback": "page"}
@@ -98,6 +102,7 @@ Without measurement, look at the image, find the element for each finding, and e
 
 Rules:
 - Same ids, titles, tags, severity, and text as the chat report. Keep the plain-language rules ([plain-language](plain-language.md)): the animated report is read by non-technical people. `evidence_tag`: `observed | inferred | needs_data`. `severity`: 0-4. `decision`: `ship | test | research`. At most 3 `do_first` entries, each pointing to an existing finding id.
+- At most 7 findings (the script warns above that); merge findings with one root cause and put small items in `notes[]`. `change` is optional and shows a Now → New box. `comparison` and `next_step` are optional; fill `comparison` only from a real earlier `findings.json`, after re-checking each old finding.
 - The first rect of a finding is its spotlight and pin position.
 - Findings that aren't a visible element (title tag, `lang` attribute, tracking code, anything about a script) get `"anchor": {"fallback": "page"}` and no rects. They appear in the page-level lane, not as pins.
 - Elements created only by JavaScript after the first view (pop-ups, chat widgets) may not exist at capture time. Anchor them to the nearest stable element or leave them page-level, and say so in the evidence text.

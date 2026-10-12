@@ -18,6 +18,7 @@ Icons appear only at the start of section headings. In tables, cards, and runnin
 Rules:
 - One icon per heading, at its start. No icons in table cells, card fields, bullets, or sentences.
 - A finding card title may carry its severity circle (🔴 🟠 🟡 🟢 ⚪) as its only icon, always next to the text label.
+- Keep the main list to 7 findings at most (Quick mode: 5). Merge findings that share a root cause. Put small items in **Smaller notes**, one line each.
 - Do not add a confidence rating or a "can you trust your numbers" line. They are not part of the report.
 
 ## Layout rules
@@ -69,6 +70,7 @@ One card per finding, in the same order as the table.
 - **What I saw:** [what you saw, with the exact place; say if it is a fact or your judgment]
 - **Impact:** [qualitative effect and why; label it a judgment if it is one; no invented percentages]
 - **Fix:** [specific change in plain words]
+- **Change:** (only when the fix is a text change) Now: "[current text]" → New: "[ready-to-paste text; [brackets] for facts only the owner knows]"
 - **For your developer:** [technical details, only if needed]
 ```
 
@@ -120,9 +122,16 @@ Bullet list of the missing inputs and the cheapest way to get each (for example 
 
 When citing a case study or benchmark, include source, date, what was measured, and how reliable the source is; for a headline lift of +30% or more, say it is unlikely to transfer.
 
+## Smaller notes, next step, previous audit
+
+After What works, add (omit any that is empty):
+- **Smaller notes:** one line each, for minor or unsure items that did not earn a card.
+- **Next step:** one sentence: do the top 3, then run the audit again.
+- **Previous audit:** only when an earlier `findings.json` for the same site exists. "12 earlier findings: 7 fixed, 3 still open, 2 new." Re-check each old finding on the live page first.
+
 ## Findings JSON (for the animated visual report)
 
-The chat report is the source of truth. `findings.json` is its structured copy, with the same ids and text; the schema and capture steps are in [visual-report](visual-report.md). Card field to JSON key: id → `id`, title → `title`, evidence label → `evidence_tag` (`observed|inferred|needs_data`), severity label → `severity` (0-4), decision label → `decision` (`ship|test|research`), What I saw → `evidence`, Impact → `impact`, Fix → `fix`, plus `anchor` (selector, text, measured rects, or a page-level fallback).
+The chat report is the source of truth. `findings.json` is its structured copy, with the same ids and text; the schema and capture steps are in [visual-report](visual-report.md). Card field to JSON key: id → `id`, title → `title`, evidence label → `evidence_tag` (`observed|inferred|needs_data`), severity label → `severity` (0-4), decision label → `decision` (`ship|test|research`), What I saw → `evidence`, Impact → `impact`, Fix → `fix`, plus `change` (`{"from": ..., "to": ...}`), plus `anchor` (selector, text, measured rects, or a page-level fallback). Report level: `notes[]` (smaller notes), `next_step`, and `comparison` (`{date, previous_total, resolved, still_open, new}`).
 
 ## Quick mode
 

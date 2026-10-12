@@ -118,15 +118,15 @@ If value per conversion and volume are known, give a rough revenue-at-stake fram
 
 ## Step 7: Output
 
-Use the templates in [output-templates](references/output-templates.md). Write in the user's language. Icons only in section headings, never in tables, cards, or sentences. Use plain words and explain unavoidable technical terms in brackets ([plain-language](references/plain-language.md)). Standard report order:
+Use the templates in [output-templates](references/output-templates.md). Write in the user's language. Icons only in section headings, never in tables, cards, or sentences. Use plain words and explain unavoidable technical terms in brackets ([plain-language](references/plain-language.md)). Standard report order. Keep the main list to **7 findings at most** (Quick: 5). Merge findings with the same root cause into one (for example all date and count problems, or all button-label problems), listing every place in the evidence line. Move small or unsure items into one-line **Smaller notes**. Where a fix is a text change, show it in a **Change** box (Now → New) with ready-to-paste wording; mark facts you must fill in as [brackets].
 
 1. 🎯 **Summary** (short lines): main blocker, what you checked, what you could not check.
 2. ⚡ **Do first**: the top 3 actions, one line each.
 3. 📋 **Overview table** with short cells: # | Finding | Evidence | Severity | Decision (text labels, no icons).
-4. 🔍 **Finding cards**, one per finding (what I saw, impact, fix), in table order.
+4. 🔍 **Finding cards**, one per finding (what I saw, impact, fix, and the Change box when the fix is a text change), in table order.
 5. ✅ **What works**, then 🧭 viability and 💰 revenue at stake when you have the numbers.
 6. ✍️ **Copy drafts**: 2-3 options with a one-line rationale each for the headline, main CTA, and form button, only when you have the offer context; mark as drafts and never invent proof. For pages with a form, add the **form audit** and **recommended form design**.
-7. 📊 **Measurement plan**, then 🚫 **Could not assess / data needed**.
+7. 📊 **How to track results**, then 🚫 **What I could not check**, then a **Next step** line: "Do these 3 things, then run this audit again." If an earlier audit of the same site exists in `cro-reports/` (`<domain>-*/findings.json`), read the latest one, re-check each old finding on the live page, and add a **Previous audit** line: how many were fixed, still open, and new. Never mark something fixed without seeing it fixed.
 
 Keep it scannable: long text goes into cards (not table cells), and the reader should know what to do first without scrolling. Lead with the single most important change.
 
