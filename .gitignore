@@ -1,0 +1,4 @@
+.DS_Store
+cro-reports/
+*.pyc
+__pycache__/
